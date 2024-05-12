@@ -1,60 +1,47 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link.js";
+import { readJson } from "../../services/util.js";
 import type { NextPage } from "next";
+import { formatEther } from "viem";
 import { useAccount } from "wagmi";
 import { IntegerInput } from "~~/components/scaffold-eth";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth/useScaffoldReadContract";
-import { useScaffoldContract } from "~~/hooks/scaffold-eth/useScaffoldContract";
-
-import { readJson } from "../../services/util.js";
-import { formatEther } from 'viem'
-import Link from "next/link.js";
 
 const AuctionCrypto: NextPage = () => {
-  const { address: connectedAddress } = useAccount();
   const account = useAccount();
 
-  const smartContractName= "AuctionCrypto";
-
-  const { data: contractAddress } = useScaffoldContract({
-    contractName: smartContractName,
-  });
-
-
-  const { data: totalSupply } = useScaffoldReadContract({
-    contractName: smartContractName,
-    functionName: "totalSupply",
-  });
-
-  const { data: symbol } = useScaffoldReadContract({
-    contractName: smartContractName,
-    functionName: "symbol",
-  });
-
-  const { data: nameContract } = useScaffoldReadContract({
-    contractName: smartContractName,
-    functionName: "name",
-  });
-
-
-
+  const smartContractName = "AuctionCrypto";
 
   const showTokenId = false;
 
-  const [tokensAvailable, setTokensAvailable] = useState<{tokenId: any; name: any; initValue: any; metadata: any;
-    available: any;  dateCheckIn: any;  image: any; attributes: any;}[]>([]);
-  
+  const [tokensAvailable, setTokensAvailable] = useState<
+    {
+      tokenId: any;
+      name: any;
+      initValue: any;
+      metadata: any;
+      available: any;
+      dateCheckIn: any;
+      image: any;
+      attributes: any;
+    }[]
+  >([]);
+
   const { data: tokenBalance } = useScaffoldReadContract({
     contractName: smartContractName,
     functionName: "balanceOf",
     args: [account?.address ?? ""],
   });
 
-  const { data: getOwnerTokens, isLoading, error } = useScaffoldReadContract({
+  const {
+    data: getOwnerTokens,
+    isLoading,
+    error,
+  } = useScaffoldReadContract({
     contractName: smartContractName,
     functionName: "getAllTokens",
-   // args: [account?.address ?? ""],
   });
 
   useEffect(() => {
@@ -65,27 +52,22 @@ const AuctionCrypto: NextPage = () => {
         }
         if (getOwnerTokens) {
           const tokensAvailable = [];
-          const tokensNotAvailable = [];
           for (let indx = 0; indx < getOwnerTokens.length; indx++) {
-              const metadataJson = await readJson(getOwnerTokens[indx].metadata);
-              const item = {
-                tokenId: getOwnerTokens[indx].tokenId,
-                name: getOwnerTokens[indx].name,
-                initValue: getOwnerTokens[indx].initValue,
-                metadata: getOwnerTokens[indx].metadata,
-                available: getOwnerTokens[indx].available,
-                dateCheckIn: getOwnerTokens[indx].dateCheckIn,
-                image: metadataJson.image, // Atribui a imagem do metadataJson
-                attributes: metadataJson.attributes // Atribui os atributos do metadataJson
-              };
+            const metadataJson = await readJson(getOwnerTokens[indx].metadata);
+            const item = {
+              tokenId: getOwnerTokens[indx].tokenId,
+              name: getOwnerTokens[indx].name,
+              initValue: getOwnerTokens[indx].initValue,
+              metadata: getOwnerTokens[indx].metadata,
+              available: getOwnerTokens[indx].available,
+              dateCheckIn: getOwnerTokens[indx].dateCheckIn,
+              image: metadataJson.image, // Atribui a imagem do metadataJson
+              attributes: metadataJson.attributes, // Atribui os atributos do metadataJson
+            };
 
-              if (getOwnerTokens[indx].available)
-                tokensAvailable.push(item);
-              else 
-               tokensNotAvailable.push(item);
+            if (getOwnerTokens[indx].available) tokensAvailable.push(item);
           }
           setTokensAvailable(tokensAvailable);
-          setTokensNotAvailable(tokensNotAvailable);
         }
       } catch (error) {
         console.error("Erro ao obter tokens do proprietário:", error);
@@ -94,65 +76,56 @@ const AuctionCrypto: NextPage = () => {
     fetchData();
   }, [getOwnerTokens, isLoading, error]);
 
-  const handleOpenDetail = (tokenIdNewPage) => {
-
+  const handleOpenDetail = (tokenIdNewPage: string) => {
     localStorage.setItem("tokenIdBefore", tokenIdNewPage);
-    window.location.replace('/detail?tokenId'); 
-   };
+    window.location.replace("/detail?tokenId");
+  };
 
   return (
     <div className="flex items-center flex-col flex-grow pt-5">
-      
       <div className="px-5">
-
-        <div className="flex justify-center items-center space-x-2">   
-
-          <span> Numero De Tokens: {String(tokenBalance) || '0'}</span>
-          <br/>
+        <div className="flex justify-center items-center space-x-2">
+          <span> Numero De Tokens: {String(tokenBalance) || "0"}</span>
+          <br />
         </div>
       </div>
-
-
       <div>
-      <div className="flex-1 card bg-base-100 shadow-xl">
-
-              </div>
-
+        <div className="flex-1 card bg-base-100 shadow-xl"></div>
 
         <div className="px-12">
-          <hr style={{ width: "100%", borderTop: "1px solid #ccc", margin: "10px 0" }}/>            
-        </div>        
-        <div className="px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 justify-items-stretch">          
-          {tokensAvailable && tokensAvailable.map((token, index) => (
+          <hr style={{ width: "100%", borderTop: "1px solid #ccc", margin: "10px 0" }} />
+        </div>
+        <div className="px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 justify-items-stretch">
+          {tokensAvailable?.map((token, index) => (
             <div className="flex flex-col justify-between card bg-base-100 shadow-xl">
               <div className="card-body">
-                <p key={index}>            
+                <p key={index}>
                   {showTokenId && (
-                    <IntegerInput disabled name="tokenIdCheckIn" value={token.tokenId} 
-                    onChange={(e) => { console.log(e) }}/>
-                  )}                
+                    <IntegerInput
+                      disabled
+                      name="tokenIdCheckIn"
+                      value={token.tokenId}
+                      onChange={e => {
+                        console.log(e);
+                      }}
+                    />
+                  )}
                   <h4 className="card-title">{token.name}</h4>
-                  <Link href=""
-                  onClick={() => handleOpenDetail(token.tokenId || "0")} >
-                  <img src={String(token.image) || '0'} className="w-25 h-25"/> 
-                  </Link>                
- 
-                 <div className="card-actions justify-center">
-                  <hr style={{ width: "100%", borderTop: "1px solid #ccc", margin: "10px 0" }}/>
+                  <Link href="" onClick={() => handleOpenDetail(token.tokenId || "0" as string)}>
+                    <img src={String(token.image) || "0"} className="w-25 h-25" alt={String(token.image) || "0"} />
+                  </Link>
 
-                  <span className="text-xs"> {formatEther(token.initValue)} ETH</span>
+                  <div className="card-actions justify-center">
+                    <hr style={{ width: "100%", borderTop: "1px solid #ccc", margin: "10px 0" }} />
 
-                   
-                </div>              
+                    <span className="text-xs"> {formatEther(token.initValue)} ETH</span>
+                  </div>
                 </p>
-              
               </div>
             </div>
-          ) )}              
+          ))}
         </div>
-        
       </div>
-
     </div>
   );
 };

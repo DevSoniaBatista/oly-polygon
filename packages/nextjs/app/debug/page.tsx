@@ -11,9 +11,7 @@ const Debug: NextPage = () => {
   return (
     <>
       <DebugContracts />
-      <div className="text-center mt-8 bg-secondary p-10">
-      
-      </div>
+      <div className="text-center mt-8 bg-secondary p-10"></div>
     </>
   );
 };

@@ -1,11 +1,71 @@
+<h1 align="center"> <img src="../oly/packages/nextjs/public/oly.svg">
+</h1>
+
 # Contrato Inteligente de Leilão e Tokens - Crypto Genius - OLY
+
+<a href= "https://www.loom.com/share/994d994ef77840f4bb8fafdfb16a302f?sid=b36019ee-7d2a-4f6f-be47-7dc82988d45d"> Video Demo </a>
 
 Este contrato inteligente, desenvolvido em Solidity, oferece funcionalidades para criar leilões e tokens, facilitando a interação e transação de ativos digitais na blockchain. Pode ser implantado em qualquer EVM compatível.
 
-# CONTRACT ADDRESS 
+### CONTRACT ADDRESS 
 0x5784C68138C4427DC1Db4A9f2679D35D3aE246dB
-## Explorer Scan
+### Explorer Scan
 https://cardona-zkevm.polygonscan.com/address/0x5784C68138C4427DC1Db4A9f2679D35D3aE246dB
+
+### Ferramentas
+ - Framework Scaffold-ETH-2 (sub-components: HardHat and Next.js)
+ - Smart Contract => Solidity (/oly/packages/hardhat/contracts)
+ - Front-end (/oly/packages/nextjs/app)
+
+### Como utilizar
+```bash
+#clone the project
+git clone https://github.com/DevSoniaBatista/oly-polygon.git
+```
+
+```bash
+#enter directory
+cd oly-polygon
+```
+
+```bash
+#install dependencies
+yarn install
+```
+ 
+ To run locally, open 3 terminals:
+
+ First Terminal:
+```bash
+#execute hardhat locally
+cd package/hardhat
+yarn chain
+```
+
+Second Terminal:
+```bash
+#deploy the contract locally
+cd package/hardhat
+yarn chain
+```
+<p>or</p>
+
+```bash
+#deploy the contract in the Cardona network
+cd package/hardhat
+yarn deploy --network polygonZkEvmCardona
+```
+
+Third Terminal:
+```bash
+#Launch the DApp
+cd package/nextjs
+yarn start 
+```
+
+It will open the interface web on http://localhost:3000
+
+<hr/>
 
 ## Funcionalidades
 
@@ -21,17 +81,11 @@ O contrato possibilita pagamentos em Ethereum para arrematar itens em leilões o
 ## Como Usar
 
 Para utilizar o contrato AuctionCrypto, siga estas etapas:
+1. **Interagir com o Contrato**: Utilize uma carteira Ethereum compatível, como MetaMask, para interagir com o contrato. Isso inclui criar novos leilões, fazer lances em leilões existentes, criar tokens e comprar tokens disponíveis. Para criar tokens ou leilões, utilize JSON como metadata, como exemplo: [JSON](https://azure-bitter-grasshopper-987.mypinata.cloud/ipfs/QmQH2tbg9MV1wBad12pT6momaCmEjFADkc59FaGRYFaN3q)
 
-1. **Deploy do Contrato**: O contrato implementado no framework Scaffold
+2. **Gerenciar Transações**: Ao participar de leilões ou comprar tokens, assegure-se de possuir saldo suficiente em sua carteira Ethereum. Além disso, esteja ciente das taxas associadas às transações, incluindo taxas de gás e taxas de serviço do contrato.
 
-### Exemplo de como executar o Deploy na rede Polygon zkEvmCardona Testnet
-`yarn deploy --network polygonZkEvmCardonaTestnet`
-
-2. **Interagir com o Contrato**: Utilize uma carteira Ethereum compatível, como MetaMask, para interagir com o contrato. Isso inclui criar novos leilões, fazer lances em leilões existentes, criar tokens e comprar tokens disponíveis.
-
-3. **Gerenciar Transações**: Ao participar de leilões ou comprar tokens, assegure-se de possuir saldo suficiente em sua carteira Ethereum. Além disso, esteja ciente das taxas associadas às transações, incluindo taxas de gás e taxas de serviço do contrato.
-
-4. **Monitorar Atividades**: Acompanhe os eventos emitidos pelo contrato para monitorar a atividade dos leilões e transações de tokens. Isso inclui eventos como a criação de novos leilões, lances em leilões, encerramento de leilões e compra de tokens.
+3. **Monitorar Atividades**: Acompanhe os eventos emitidos pelo contrato para monitorar a atividade dos leilões e transações de tokens. Isso inclui eventos como a criação de novos leilões, lances em leilões, encerramento de leilões e compra de tokens.
 
 ## Autor
 Este contrato foi desenvolvido pela Equipe CryptoGenius.
@@ -83,17 +137,11 @@ The contract enables payments in Ethereum to bid on items in auctions or purchas
 
 To utilize the AuctionCrypto contract, follow these steps:
 
-1. **Deploy the Contract**: This contract was implemented and deployed on Scaffold Framework
+1. **Interact with the Contract**: Use a compatible Ethereum wallet, such as MetaMask, to interact with the contract. This includes creating new auctions, placing bids on existing auctions, creating tokens, and purchasing available tokens. To create tokens or auctions, use the metadata JSON, as shown in this example: [JSON](https://azure-bitter-grasshopper-987.mypinata.cloud/ipfs/QmQH2tbg9MV1wBad12pT6momaCmEjFADkc59FaGRYFaN3q)
 
-   #### Example of how to deploy on the Polygon zkEvmCardona Testnet network
-`yarn deploy --network polygonZkEvmCardonaTestnet`
+2. **Manage Transactions**: When participating in auctions or purchasing tokens, ensure you have a sufficient balance in your Ethereum wallet. Also, be aware of the associated transaction fees.
 
-
-2. **Interact with the Contract**: Use a compatible Ethereum wallet, such as MetaMask, to interact with the contract. This includes creating new auctions, placing bids on existing auctions, creating tokens, and purchasing available tokens.
-
-3. **Manage Transactions**: When participating in auctions or purchasing tokens, ensure you have a sufficient balance in your Ethereum wallet. Also, be aware of the associated transaction fees.
-
-4. **Monitor Activities**: Keep track of events emitted by the contract to monitor auction and token transaction activity. This includes events such as the creation of new auctions, bids on auctions, auction closure, and token purchases.
+3. **Monitor Activities**: Keep track of events emitted by the contract to monitor auction and token transaction activity. This includes events such as the creation of new auctions, bids on auctions, auction closure, and token purchases.
 
 ## Author
 This contract was developed by the CryptoGenius Team.

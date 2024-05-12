@@ -4,7 +4,7 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bars3Icon, BugAntIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
@@ -15,7 +15,7 @@ type HeaderMenuLink = {
 };
 
 export const menuLinks: HeaderMenuLink[] = [
- {
+  {
     label: "Home",
     href: "/",
   },
@@ -23,15 +23,13 @@ export const menuLinks: HeaderMenuLink[] = [
   {
     label: "Atletas",
     href: "/oly",
-    },
-    
+  },
+
   {
     label: "Admin",
     href: "/debug",
     icon: <BugAntIcon className="h-4 w-4" />,
   },
-  
-
 ];
 
 export const HeaderMenuLinks = () => {
@@ -98,7 +96,7 @@ export const Header = () => {
         </div>
         <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
           <div className="flex relative w-10 h-10">
-            <Image alt="logo" className="cursor-pointer" fill src="/oly.svg" />
+            <Image src="/oly.svg" alt="logo" width={800} height={500} className="cursor-pointer" />
           </div>
           <div className="flex flex-col">
             <span className="font-bold leading-tight"></span>

@@ -1,32 +1,38 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
-
+import { useEffect, useState } from "react";
+import { readJson } from "../../services/util.js";
 import type { NextPage } from "next";
-import { useAccount } from "wagmi";
+import { formatEther } from "viem";
 import { IntegerInput } from "~~/components/scaffold-eth";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth/useScaffoldReadContract";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWriteContract";
-import { readJson } from "../../services/util.js";
-import { formatEther } from 'viem'
 
 const AuctionCrypto: NextPage = () => {
-  const { address: connectedAddress } = useAccount();
-  const account = useAccount();
-
-  const smartContractName= "AuctionCrypto";
-
-  const tokenIdParameter = localStorage.getItem("tokenIdBefore") || 'undefined';
-
+  const [transferResult, setTransferResult] = useState("");
+  const smartContractName = "AuctionCrypto";
+  const tokenIdParameter = localStorage.getItem("tokenIdBefore") || "undefined";
   const showTokenId = false;
-
-  const [tokensAvailable, setTokensAvailable] = useState<{tokenId: any; name: any; initValue: any; metadata: any;
-    available: any;  dateCheckIn: any;  image: any; attributes: any;}[]>([]);
-  
-  const { data: getOwnerTokens, isLoading, error } = useScaffoldReadContract({
+  const [tokensAvailable, setTokensAvailable] = useState<
+    {
+      tokenId: any;
+      name: any;
+      initValue: any;
+      metadata: any;
+      available: any;
+      dateCheckIn: any;
+      image: any;
+      attributes: any;
+    }[]
+  >([]);
+  const {
+    data: getOwnerTokens,
+    isLoading,
+    error,
+  } = useScaffoldReadContract({
     contractName: smartContractName,
     functionName: "tokensCreated",
-    args: [BigInt(tokenIdParameter || '0')],
+    args: [BigInt(tokenIdParameter || "0")],
   });
 
   useEffect(() => {
@@ -46,7 +52,7 @@ const AuctionCrypto: NextPage = () => {
             available: getOwnerTokens[4],
             dateCheckIn: getOwnerTokens[5],
             image: metadataJson.image, // Atribui a imagem do metadataJson
-            attributes: metadataJson.attributes // Atribui os atributos do metadataJson
+            attributes: metadataJson.attributes, // Atribui os atributos do metadataJson
           };
 
           tokensAvailable.push(item);
@@ -60,16 +66,16 @@ const AuctionCrypto: NextPage = () => {
   }, [getOwnerTokens, isLoading, error]);
 
   const { writeContractAsync: purchaseToken } = useScaffoldWriteContract(smartContractName);
-  const handleByToken = async (tokenIdCheckIn) => {
+  const handleByToken = async (tokenIdCheckIn: string) => {
     try {
       const transferResult = await purchaseToken({
         functionName: "purchaseToken",
         args: [BigInt(tokenIdCheckIn)],
       });
-  
+
       if (transferResult !== undefined) {
-          setTransferResult("Hash Transaction Result: "+transferResult);
-      }   
+        setTransferResult("Hash Transaction Result: " + transferResult);
+      }
       return transferResult;
     } catch (e) {
       console.error("Error transferring tokens:", e);
@@ -77,46 +83,47 @@ const AuctionCrypto: NextPage = () => {
     }
   };
 
-
   return (
     <div className="flex items-center flex-col flex-grow pt-5">
-      
-      <div className="px-5">
-      </div>
+      <div className="px-5"></div>
 
       <div>
-        <div className="px-12 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 justify-items-stretch">          
-          {tokensAvailable && tokensAvailable.map((token, index) => (
+        <div className="px-12 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 justify-items-stretch">
+          {tokensAvailable?.map((token, index) => (
             <div className="flex flex-col justify-between card bg-base-100 shadow-xl">
               <div className="card-body">
-                <p key={index}>            
+                <p key={index}>
                   {showTokenId && (
-                    <IntegerInput disabled name="tokenIdCheckIn" value={token.tokenId} 
-                    onChange={(e) => { console.log(e) }}/>
-                  )}                
+                    <IntegerInput
+                      disabled
+                      name="tokenIdCheckIn"
+                      value={token.tokenId}
+                      onChange={e => {
+                        console.log(e);
+                      }}
+                    />
+                  )}
                   <h4 className="card-title">{token.name}</h4>
-                  <img src={String(token.image) || '0'} className="w-25 h-25"/> 
-                
-                 <div className="card-actions justify-center">
-                  <hr style={{ width: "100%", borderTop: "1px solid #ccc", margin: "10px 0" }}/>
+                  <img src={String(token.image) || "0"} className="w-25 h-25" alt={String(token.image) || "0"} />
+                  <div className="card-actions justify-center">
+                    <hr style={{ width: "100%", borderTop: "1px solid #ccc", margin: "10px 0" }} />
                     <span className="text-xs"> {formatEther(token.initValue)} ETH</span>
 
                     <p>
-                    <button className="btn btn-primary text-ml text-white mt-2"
-                     onClick={() => handleByToken(token.tokenId)}>Buy
-                  </button>
+                      <button
+                        className="btn btn-primary text-ml text-white mt-2"
+                        onClick={() => handleByToken(token.tokenId || "0" as string)}>
+                        Buy
+                      </button>
                     </p>
-
-                </div>              
+                    <p>{transferResult}</p>
+                  </div>
                 </p>
-              
               </div>
             </div>
-          ) )}              
+          ))}
         </div>
-        
       </div>
-
     </div>
   );
 };

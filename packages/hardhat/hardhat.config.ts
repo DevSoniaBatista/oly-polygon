@@ -90,8 +90,8 @@ const config: HardhatUserConfig = {
       url: `https://polygonzkevm-testnet.g.alchemy.com/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
     },
-    polygonZkEvmCardonaTestnet: {
-      url: `https://polygon-zkevm-cardona.blockpi.network/v1/rpc/public/${providerApiKey}`,
+    polygonZkEvmCardona: {
+      url: `https://polygon-zkevm-cardona.blockpi.network/v1/rpc/public/`,
       accounts: [deployerPrivateKey],
     },
     gnosis: {
@@ -119,17 +119,17 @@ const config: HardhatUserConfig = {
       accounts: [deployerPrivateKey],
     },
     tanssi: {
-      url: 'https://fraa-dancebox-3001-rpc.a.dancebox.tanssi.network',
+      url: "https://fraa-dancebox-3001-rpc.a.dancebox.tanssi.network",
       accounts: [deployerPrivateKey],
-   },
-   scroll: {
-    url: "https://sepolia-rpc.scroll.io",
-    accounts: [deployerPrivateKey],
-  },
-  chiliz: {
-    url: "https://spicy-rpc.chiliz.com",
-    accounts: [deployerPrivateKey],
-  },
+    },
+    scroll: {
+      url: "https://sepolia-rpc.scroll.io",
+      accounts: [deployerPrivateKey],
+    },
+    chiliz: {
+      url: "https://spicy-rpc.chiliz.com",
+      accounts: [deployerPrivateKey],
+    },
   },
   // configuration for harhdat-verify plugin
   etherscan: {
