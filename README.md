@@ -1,4 +1,4 @@
-<h1 align="center"> <img src="../oly/packages/nextjs/public/oly.svg">
+<h1 align="center"> <img src="../oly-polygon/packages/nextjs/public/oly.svg">
 </h1>
 
 # Contrato Inteligente de Leilão e Tokens - Crypto Genius - OLY
