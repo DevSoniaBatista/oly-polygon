@@ -4,9 +4,17 @@
 ## Crypto Genius Team
 # OLY - Smart Auction and Tokens Contract
 
-<p><a href= "https://www.loom.com/share/547878f4f45e41fc9d14c5fb5c4fcbd6?sid=5e1af2be-e0de-4fa9-8dc1-224957230b58"> Demo </a> </p>
+<p><a href="https://www.youtube.com/watch?v=oZKfzuOv_T4">
+PITCH (Youtube)
+</a></p>
+<p><a href= "https://www.loom.com/share/547878f4f45e41fc9d14c5fb5c4fcbd6?sid=5e1af2be-e0de-4fa9-8dc1-224957230b58"> 
+Demo (loom) 
+</a> </p>
 <p><a href="https://polygon-cardona-rcpibhroq-devsoniabatistas-projects.vercel.app">
 Front-End Integration
+</a></p>
+<p><a href="https://azure-bitter-grasshopper-987.mypinata.cloud/ipfs/QmX76FMgZpN5JySWFfheCJnKTPvyaUXW8ha8hVjik8TM1x">
+PDF Presentation 
 </a></p>
 
 
