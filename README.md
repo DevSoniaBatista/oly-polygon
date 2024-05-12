@@ -1,16 +1,21 @@
 <h1 align="center"> <img src="./packages/nextjs/public/oly.svg">
 </h1>
 
-# Contrato Inteligente de Leilão e Tokens - Crypto Genius - OLY
+## Equipe CryptoGenius
+# OLY - Contrato Inteligente de Leilão e Tokens
 
-<a href= "https://www.loom.com/share/994d994ef77840f4bb8fafdfb16a302f?sid=b36019ee-7d2a-4f6f-be47-7dc82988d45d"> Video Demo </a>
+<p><a href= "https://www.loom.com/share/547878f4f45e41fc9d14c5fb5c4fcbd6?sid=5e1af2be-e0de-4fa9-8dc1-224957230b58"> Vídeo Demo </a> </p>
+<p><a href="https://polygon-cardona-rcpibhroq-devsoniabatistas-projects.vercel.app">
+Integração Front-End 
+</a></p>
 
 Este contrato inteligente, desenvolvido em Solidity, oferece funcionalidades para criar leilões e tokens, facilitando a interação e transação de ativos digitais na blockchain. Pode ser implantado em qualquer EVM compatível.
+Observação: Neste contrato foi removido o controle admin (Owner) para que fosse possível a interação de outras carteiras para teste.
 
-### CONTRACT ADDRESS 
-0x5784C68138C4427DC1Db4A9f2679D35D3aE246dB
+### CONTRACT ADDRESS Deployed at Polygon Cardona
+0x3EE3903251D48024eA51Df3464548886b92039d8
 ### Explorer Scan
-https://cardona-zkevm.polygonscan.com/address/0x5784C68138C4427DC1Db4A9f2679D35D3aE246dB
+https://cardona-zkevm.polygonscan.com/address/0x3EE3903251D48024eA51Df3464548886b92039d8
 
 ### Ferramentas / Tools
  - Framework Scaffold-ETH-2 (sub-components: HardHat and Next.js)
@@ -18,6 +23,10 @@ https://cardona-zkevm.polygonscan.com/address/0x5784C68138C4427DC1Db4A9f2679D35D
  - Front-end (/oly/packages/nextjs/app)
 
 ### Como executar / How execute
+Use the frontend integration at the URL: https://polygon-cardona-rcpibhroq-devsoniabatistas-projects.vercel.app 
+
+<p>OR</p>
+
 ```bash
 #clone the project
 git clone https://github.com/DevSoniaBatista/oly-polygon.git
@@ -46,15 +55,13 @@ On a second terminal, deploy the contract:
 ```bash
 #deploy the contract locally
 cd package/hardhat
-yarn chain
+yarn generate
+yarn deploy 
 ```
-<p>or</p>
 
-```bash
-#deploy the contract in the Cardona network
-cd package/hardhat
-yarn deploy --network polygonZkEvmCardona
-```
+On the file: packages/nextjs/scaffold.config.ts change the line 13:
+From: targetNetworks: [chains.polygonZkEvmCardona],
+To:   targetNetworks: [chains.hardhat],
 
 On a third terminal, start DApp:
 ```bash
@@ -63,7 +70,9 @@ cd package/nextjs
 yarn start 
 ```
 
-It will open the interface web on http://localhost:3000
+It will open the interface web at http://localhost:3000
+
+
 
 <hr/>
 
@@ -117,8 +126,10 @@ Desenvolvedor Flutter,  Fundador da Eita Rolê, empreendedor com experiência em
 LinkedIn: https://www.linkedin.com/in/devmatheusoliveira/
 matheusoliveira.workmso@gmail.com
 
+<hr/>
 
-# Smart Auction and Tokens Contract - Crypto Genius - OLY
+## Crypto Genius Team
+# OLY - Smart Auction and Tokens Contract
 
 This smart contract, developed in Solidity, offers functionalities for creating auctions and tokens, facilitating the interaction and transaction of digital assets on the blockchain. It can be deployed on any compatible EVM.
 
@@ -148,8 +159,6 @@ This contract was developed by the CryptoGenius Team.
 For more information, please contact hackateam4@gmail.com.
 
 ## CryptoGenius Team
-
-
 *Dayana Mazini
 UX/UI, Administrator, entrepreneur with experience in developing innovative businesses in the fields of finance, education, and social transformation.
 LinkedIn: https://www.linkedin.com/in/dayanamazini/ 

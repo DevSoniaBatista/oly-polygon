@@ -41,7 +41,10 @@ const AuctionCrypto: NextPage = () => {
   });
 
   const {
-    data: getOwnerTokens, isLoading, error, } = useScaffoldReadContract({
+    data: getOwnerTokens,
+    isLoading,
+    error,
+  } = useScaffoldReadContract({
     contractName: smartContractName,
     functionName: "getAllTokens",
   });
@@ -78,9 +81,9 @@ const AuctionCrypto: NextPage = () => {
     fetchData();
   }, [getOwnerTokens, isLoading, error]);
 
-  const handleOpenDetail = (tokenIdNewPage : string) => {
+  const handleOpenDetail = (tokenIdNewPage: string) => {
     localStorage.setItem("tokenIdParameter", tokenIdNewPage);
-    window.location.replace('/detail?tokenIdParameter'); 
+    window.location.replace("/detail?tokenIdParameter");
   };
 
   return (
@@ -113,7 +116,7 @@ const AuctionCrypto: NextPage = () => {
                     />
                   )}
                   <h4 className="card-title">{token.name}</h4>
-                  <Link href="" onClick={() => handleOpenDetail(token.tokenId || "0" as string)}>
+                  <Link href="" onClick={() => handleOpenDetail(token.tokenId || ("0" as string))}>
                     <img src={String(token.image) || "0"} className="w-25 h-25" alt={String(token.image) || "0"} />
                   </Link>
 

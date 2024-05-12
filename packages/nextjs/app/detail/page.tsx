@@ -12,7 +12,7 @@ const AuctionCrypto: NextPage = () => {
   const [transferResult, setTransferResult] = useState("");
   const smartContractName = "AuctionCrypto";
 
-  const tokenIdParameter = typeof window !== 'undefined' ? localStorage.getItem("tokenIdParameter") : null;
+  const tokenIdParameter = typeof window !== "undefined" ? localStorage.getItem("tokenIdParameter") : null;
 
   const showTokenId = false;
   const [tokensAvailable, setTokensAvailable] = useState<
@@ -28,8 +28,11 @@ const AuctionCrypto: NextPage = () => {
     }[]
   >([]);
 
-
-  const { data: getOwnerTokens, isLoading, error, } = useScaffoldReadContract({
+  const {
+    data: getOwnerTokens,
+    isLoading,
+    error,
+  } = useScaffoldReadContract({
     contractName: smartContractName,
     functionName: "tokensCreated",
     args: [BigInt(tokenIdParameter || "0")],
@@ -111,7 +114,8 @@ const AuctionCrypto: NextPage = () => {
                     <p>
                       <button
                         className="btn btn-primary text-ml text-white mt-2"
-                        onClick={() => handleByToken(token.tokenId || "0" as string)}>
+                        onClick={() => handleByToken(token.tokenId || ("0" as string))}
+                      >
                         Buy
                       </button>
                     </p>
