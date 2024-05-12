@@ -33,16 +33,16 @@ cd oly-polygon
 yarn install
 ```
  
- To run locally, open 3 terminals:
+To run locally, open 3 terminals:
 
- First Terminal:
+On a first terminal, execute hardhat
 ```bash
 #execute hardhat locally
 cd package/hardhat
 yarn chain
 ```
 
-Second Terminal:
+On a second terminal, deploy the contract:
 ```bash
 #deploy the contract locally
 cd package/hardhat
@@ -56,7 +56,7 @@ cd package/hardhat
 yarn deploy --network polygonZkEvmCardona
 ```
 
-Third Terminal:
+On a third terminal, start DApp:
 ```bash
 #Launch the DApp
 cd package/nextjs
