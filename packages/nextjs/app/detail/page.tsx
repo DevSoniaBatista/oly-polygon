@@ -11,7 +11,9 @@ import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWrite
 const AuctionCrypto: NextPage = () => {
   const [transferResult, setTransferResult] = useState("");
   const smartContractName = "AuctionCrypto";
-  const tokenIdParameter = localStorage.getItem("tokenIdBefore") || "undefined";
+
+  const tokenIdParameter = typeof window !== 'undefined' ? localStorage.getItem("tokenIdParameter") : null;
+
   const showTokenId = false;
   const [tokensAvailable, setTokensAvailable] = useState<
     {
@@ -25,11 +27,9 @@ const AuctionCrypto: NextPage = () => {
       attributes: any;
     }[]
   >([]);
-  const {
-    data: getOwnerTokens,
-    isLoading,
-    error,
-  } = useScaffoldReadContract({
+
+
+  const { data: getOwnerTokens, isLoading, error, } = useScaffoldReadContract({
     contractName: smartContractName,
     functionName: "tokensCreated",
     args: [BigInt(tokenIdParameter || "0")],
@@ -108,7 +108,6 @@ const AuctionCrypto: NextPage = () => {
                   <div className="card-actions justify-center">
                     <hr style={{ width: "100%", borderTop: "1px solid #ccc", margin: "10px 0" }} />
                     <span className="text-xs"> {formatEther(token.initValue)} ETH</span>
-
                     <p>
                       <button
                         className="btn btn-primary text-ml text-white mt-2"

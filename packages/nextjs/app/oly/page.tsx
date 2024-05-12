@@ -35,11 +35,13 @@ const AuctionCrypto: NextPage = () => {
     args: [account?.address ?? ""],
   });
 
+  const { data: totalSupply } = useScaffoldReadContract({
+    contractName: smartContractName,
+    functionName: "totalSupply",
+  });
+
   const {
-    data: getOwnerTokens,
-    isLoading,
-    error,
-  } = useScaffoldReadContract({
+    data: getOwnerTokens, isLoading, error, } = useScaffoldReadContract({
     contractName: smartContractName,
     functionName: "getAllTokens",
   });
@@ -76,16 +78,16 @@ const AuctionCrypto: NextPage = () => {
     fetchData();
   }, [getOwnerTokens, isLoading, error]);
 
-  const handleOpenDetail = (tokenIdNewPage: string) => {
-    localStorage.setItem("tokenIdBefore", tokenIdNewPage);
-    window.location.replace("/detail?tokenId");
+  const handleOpenDetail = (tokenIdNewPage : string) => {
+    localStorage.setItem("tokenIdParameter", tokenIdNewPage);
+    window.location.replace('/detail?tokenIdParameter'); 
   };
 
   return (
     <div className="flex items-center flex-col flex-grow pt-5">
       <div className="px-5">
         <div className="flex justify-center items-center space-x-2">
-          <span> Numero De Tokens: {String(tokenBalance) || "0"}</span>
+          <span> Numero De Tokens: {String(totalSupply) || "0"}</span>
           <br />
         </div>
       </div>
