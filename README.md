@@ -12,12 +12,12 @@ Este contrato inteligente, desenvolvido em Solidity, oferece funcionalidades par
 ### Explorer Scan
 https://cardona-zkevm.polygonscan.com/address/0x5784C68138C4427DC1Db4A9f2679D35D3aE246dB
 
-### Ferramentas
+### Ferramentas / Tools
  - Framework Scaffold-ETH-2 (sub-components: HardHat and Next.js)
  - Smart Contract => Solidity (/oly/packages/hardhat/contracts)
  - Front-end (/oly/packages/nextjs/app)
 
-### Como utilizar
+### Como executar / How execute
 ```bash
 #clone the project
 git clone https://github.com/DevSoniaBatista/oly-polygon.git
